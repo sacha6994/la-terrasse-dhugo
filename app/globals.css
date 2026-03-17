@@ -477,10 +477,3 @@ html.lenis body {
   object-fit: cover;
 }
 
-/* ═══════════════════════════════════════════
-   CUSTOM CURSOR HIDE ON INTERACTIVE
-   ═══════════════════════════════════════════ */
-
-a, button, [role="button"], input, textarea, select {
-  cursor: none !important;
-}
