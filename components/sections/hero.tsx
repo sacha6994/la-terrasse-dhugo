@@ -32,7 +32,7 @@ export function Hero() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 1300) // After page loader
+    const t = setTimeout(() => setLoaded(true), 100)
     return () => clearTimeout(t)
   }, [])
 

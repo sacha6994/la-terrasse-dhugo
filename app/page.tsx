@@ -8,7 +8,6 @@ import { Info } from "@/components/sections/info"
 import { Reservation } from "@/components/sections/reservation"
 import { Footer } from "@/components/sections/footer"
 import { SmoothScroll } from "@/components/smooth-scroll"
-import { PageLoader } from "@/components/page-loader"
 import { GrainOverlay } from "@/components/grain-overlay"
 import { Marquee } from "@/components/marquee"
 import { WaveDivider } from "@/components/wave-divider"
@@ -18,7 +17,6 @@ export default function Home() {
   return (
     <>
       {/* Premium effects layer */}
-      <PageLoader />
       <SmoothScroll />
       <GrainOverlay />
       <FloatingCTA />
