@@ -421,72 +421,150 @@
 }
 
 /* ═══════════════════════════════════════════
-   NIGHT MODE — Ambiance bar/restaurant
+   NIGHT MODE — Noir total + lumières chaudes
    ═══════════════════════════════════════════ */
 
 .night-mode {
-  --noir: #080605;
-  --creme: #1a1410;
-  --creme-light: #1e1812;
-  --gris-pierre: #8a7a65;
+  --noir: #000000;
+  --creme: #0a0a0a;
+  --creme-light: #0e0e0e;
+  --gris-pierre: #777;
   --or-ambre: #e8a84c;
-  --olive: #2a3020;
-  --olive-light: #3a4530;
-  --background: var(--creme);
-  --foreground: #f0e6d8;
-  transition: all 0.8s ease;
+  --cuivre: #d4a054;
+  --olive: #1a2610;
+  --olive-light: #283a1a;
+  --background: #000000;
+  --foreground: #e8e0d4;
+  transition: all 0.6s ease;
 }
 
-/* Warm tint on all images */
+/* ── Body ── */
+.night-mode body {
+  background-color: #000 !important;
+  color: #e8e0d4;
+}
+
+/* ── Sections — tout noir ── */
+.night-mode .bg-creme      { background-color: #0a0a0a !important; }
+.night-mode .bg-creme-light { background-color: #0e0e0e !important; }
+.night-mode .bg-noir        { background-color: #000000 !important; }
+.night-mode .bg-olive       { background-color: #080c06 !important; }
+
+/* ── Texte — contraste fort sur noir ── */
+.night-mode .text-noir        { color: #f0e8dc !important; }
+.night-mode .text-gris-pierre { color: #999 !important; }
+.night-mode .text-creme       { color: #fff !important; }
+.night-mode .text-or-ambre    { color: #f0b060 !important; }
+
+/* ── Borders visibles ── */
+.night-mode .border-noir\/10,
+.night-mode .border-creme\/10,
+.night-mode .border-creme\/20 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ── Images — warm cinematic ── */
 .night-mode img,
 .night-mode video {
-  filter: sepia(0.15) saturate(1.3) brightness(0.85) hue-rotate(-5deg);
-  transition: filter 0.8s ease;
+  filter: brightness(0.75) saturate(1.2) sepia(0.1);
+  transition: filter 0.4s ease, box-shadow 0.4s ease;
 }
 
+/* ✦ GLOW on image hover ✦ */
 .night-mode img:hover,
 .night-mode video:hover {
-  filter: sepia(0.1) saturate(1.5) brightness(0.95) hue-rotate(-5deg);
+  filter: brightness(0.9) saturate(1.4) sepia(0.05);
+  box-shadow:
+    0 0 30px rgba(232, 168, 76, 0.2),
+    0 0 60px rgba(200, 80, 30, 0.1);
 }
 
-/* Red/amber glow on images */
-.night-mode .gallery-img,
-.night-mode [data-night-glow] {
-  box-shadow: 0 0 30px -5px rgba(200, 80, 30, 0.25),
-              0 0 60px -10px rgba(200, 100, 40, 0.1);
+/* ── Map ── */
+.night-mode iframe {
+  filter: brightness(0.6) saturate(0.8) sepia(0.2);
+  transition: filter 0.4s ease;
+}
+.night-mode iframe:hover {
+  filter: brightness(0.8) saturate(1) sepia(0.1);
 }
 
-/* Warm body tint */
-.night-mode body {
-  background-color: #0e0b08;
-  color: #f0e6d8;
+/* ── Cards — glow au hover ── */
+.night-mode .card-tilt:hover {
+  box-shadow:
+    0 0 20px rgba(232, 168, 76, 0.15),
+    0 8px 30px rgba(0, 0, 0, 0.6) !important;
 }
 
-/* Sections background override */
-.night-mode .bg-creme { background-color: #1a1410; }
-.night-mode .bg-creme-light { background-color: #1e1812; }
-.night-mode .bg-noir { background-color: #080605; }
-.night-mode .bg-olive { background-color: #1a2010; }
-
-/* Text adjustments */
-.night-mode .text-noir { color: #f0e6d8; }
-.night-mode .text-gris-pierre { color: #a0907a; }
-.night-mode .text-creme { color: #f5efe5; }
-
-/* Ambient light glow on cards */
-.night-mode .card-tilt:hover,
-.night-mode .group:hover .night-card-glow {
-  box-shadow: 0 10px 40px -10px rgba(200, 80, 30, 0.3);
+.night-mode .group:hover {
+  --tw-shadow: 0 0 20px rgba(232, 168, 76, 0.1);
 }
 
-/* Scrollbar night */
-.night-mode ::-webkit-scrollbar-track { background: #0e0b08; }
-.night-mode ::-webkit-scrollbar-thumb { background: #4a3a28; }
+/* ── Rounded cards bg ── */
+.night-mode .bg-creme\/5,
+.night-mode .bg-creme\/8,
+.night-mode .bg-creme\/10 {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+.night-mode .bg-creme\/10:hover,
+.night-mode .bg-creme\/15 {
+  background-color: rgba(255, 255, 255, 0.07) !important;
+}
+.night-mode .bg-olive\/10 {
+  background-color: rgba(232, 168, 76, 0.08) !important;
+}
+.night-mode .bg-olive\/5 {
+  background-color: rgba(232, 168, 76, 0.04) !important;
+}
+.night-mode .bg-or-ambre\/5 {
+  background-color: rgba(232, 168, 76, 0.06) !important;
+}
+.night-mode .bg-or-ambre\/10 {
+  background-color: rgba(232, 168, 76, 0.08) !important;
+}
 
-/* Map warm filter */
-.night-mode iframe { filter: sepia(0.2) saturate(1.2) brightness(0.8) hue-rotate(-10deg); }
+/* ── Buttons — amber glow on hover ── */
+.night-mode .btn-hover-lift:hover {
+  box-shadow:
+    0 0 20px rgba(232, 168, 76, 0.3),
+    0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
 
-/* Ambient red light effect — pseudo-element on sections */
+.night-mode .btn-hover-lift:active {
+  box-shadow:
+    0 0 10px rgba(232, 168, 76, 0.4),
+    inset 0 0 15px rgba(232, 168, 76, 0.1) !important;
+}
+
+/* Shimmer — warm light streak */
+.night-mode .btn-shimmer::after {
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(232, 168, 76, 0.25) 44%,
+    rgba(255, 200, 100, 0.15) 50%,
+    rgba(232, 168, 76, 0.25) 56%,
+    transparent 62%
+  ) !important;
+  background-size: 200% 100%;
+}
+
+/* Pulse — deeper amber */
+.night-mode .animate-pulse-glow {
+  animation-name: pulse-glow-night !important;
+}
+
+@keyframes pulse-glow-night {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(232, 168, 76, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 25px 8px rgba(232, 168, 76, 0.15),
+      0 0 50px 15px rgba(200, 80, 30, 0.08);
+  }
+}
+
+/* ── Ambient lights on sections ── */
 .night-mode section {
   position: relative;
 }
@@ -495,40 +573,55 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 20% 80%, rgba(180, 60, 20, 0.06) 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 20%, rgba(200, 100, 30, 0.04) 0%, transparent 60%);
+  background:
+    radial-gradient(ellipse at 15% 85%, rgba(200, 80, 20, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 15%, rgba(232, 168, 76, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(180, 60, 20, 0.03) 0%, transparent 70%);
   pointer-events: none;
   z-index: 1;
 }
 
-/* Wave dividers night */
-.night-mode svg path {
-  transition: fill 0.8s ease;
+/* ── Scrollbar ── */
+.night-mode ::-webkit-scrollbar-track { background: #000; }
+.night-mode ::-webkit-scrollbar-thumb { background: #333; }
+.night-mode ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ── Wave SVG transition ── */
+.night-mode svg path { transition: fill 0.6s ease; }
+
+/* ── Links glow on hover ── */
+.night-mode a:hover {
+  text-shadow: 0 0 12px rgba(232, 168, 76, 0.3);
 }
 
-/* Button glow in night mode */
-.night-mode .btn-shimmer::after {
-  background: linear-gradient(
-    105deg,
-    transparent 40%,
-    rgba(200, 100, 30, 0.2) 45%,
-    rgba(200, 100, 30, 0.2) 55%,
-    transparent 60%
-  );
-  background-size: 200% 100%;
+/* ── Social icons glow ── */
+.night-mode .hover\:scale-110:hover {
+  box-shadow: 0 0 15px rgba(232, 168, 76, 0.25) !important;
 }
 
-.night-mode .animate-pulse-glow {
-  animation-name: pulse-glow-night;
+/* ── Divider lines ── */
+.night-mode .bg-or-ambre {
+  box-shadow: 0 0 10px rgba(232, 168, 76, 0.3);
 }
 
-@keyframes pulse-glow-night {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(200, 80, 30, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 25px 8px rgba(200, 80, 30, 0.2);
-  }
+/* ── Star icons ── */
+.night-mode .fill-or-ambre {
+  filter: drop-shadow(0 0 4px rgba(232, 168, 76, 0.4));
+}
+
+/* ── Header night ── */
+.night-mode header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Marquee ── */
+.night-mode .text-creme\/40 { color: rgba(232, 168, 76, 0.2) !important; }
+.night-mode .text-or-ambre\/40 { color: rgba(232, 168, 76, 0.3) !important; }
+
+/* ── Selection ── */
+.night-mode ::selection {
+  background-color: rgba(232, 168, 76, 0.3);
+  color: #fff;
 }
 
 .animate-marquee {
