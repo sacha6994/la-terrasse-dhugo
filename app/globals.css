@@ -1,0 +1,405 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* La Terrasse d'Hugo - Custom Palette */
+  --noir: #0d0d0d;
+  --olive: #3c4a2a;
+  --olive-light: #4a5d3a;
+  --or-ambre: #c8964e;
+  --cuivre: #d4a054;
+  --creme: #f5f0e8;
+  --creme-light: #faf7f2;
+  --gris-pierre: #8a8575;
+
+  /* Semantic tokens */
+  --background: var(--creme);
+  --foreground: var(--noir);
+  --card: var(--creme-light);
+  --card-foreground: var(--noir);
+  --popover: var(--creme);
+  --popover-foreground: var(--noir);
+  --primary: var(--noir);
+  --primary-foreground: var(--creme);
+  --secondary: var(--olive);
+  --secondary-foreground: var(--creme);
+  --muted: var(--gris-pierre);
+  --muted-foreground: var(--gris-pierre);
+  --accent: var(--or-ambre);
+  --accent-foreground: var(--noir);
+  --destructive: #b91c1c;
+  --destructive-foreground: var(--creme);
+  --border: rgba(13, 13, 13, 0.1);
+  --input: rgba(13, 13, 13, 0.1);
+  --ring: var(--or-ambre);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+  --font-handwritten: var(--font-handwritten), cursive;
+
+  /* Custom colors */
+  --color-noir: var(--noir);
+  --color-olive: var(--olive);
+  --color-olive-light: var(--olive-light);
+  --color-or-ambre: var(--or-ambre);
+  --color-cuivre: var(--cuivre);
+  --color-creme: var(--creme);
+  --color-creme-light: var(--creme-light);
+  --color-gris-pierre: var(--gris-pierre);
+
+  /* Semantic tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-creme text-noir;
+  }
+
+  ::selection {
+    background-color: var(--or-ambre);
+    color: var(--noir);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS — Entrées au scroll
+   ═══════════════════════════════════════════ */
+
+/* Fade In Up (par défaut) */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide In Left */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In Right */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale Up */
+@keyframes scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Rotate In */
+@keyframes rotate-in {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Scroll indicator bounce */
+@keyframes scroll-indicator {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(12px);
+    opacity: 0.4;
+  }
+}
+
+/* Parallax float */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Shimmer / shine effect for buttons */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(200, 150, 78, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 6px rgba(200, 150, 78, 0.15);
+  }
+}
+
+/* Counter tick */
+@keyframes counter-tick {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Divider grow */
+@keyframes divider-grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 6rem;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════ */
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-scale-up {
+  animation: scale-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-rotate-in {
+  animation: rotate-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-scroll-indicator {
+  animation: scroll-indicator 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-divider-grow {
+  animation: divider-grow 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+.stagger-8 { animation-delay: 0.8s; }
+
+/* ═══════════════════════════════════════════
+   BUTTON EFFECTS
+   ═══════════════════════════════════════════ */
+
+/* Magnetic hover lift */
+.btn-hover-lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -10px rgba(200, 150, 78, 0.4);
+}
+
+.btn-hover-lift:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px -5px rgba(200, 150, 78, 0.3);
+}
+
+/* Shimmer button overlay */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.25) 45%,
+    rgba(255, 255, 255, 0.25) 55%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Border draw effect */
+.btn-border-draw {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-border-draw::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  transition: border-color 0.4s ease;
+}
+
+.btn-border-draw:hover::before {
+  border-color: var(--or-ambre);
+}
+
+/* ═══════════════════════════════════════════
+   IMAGE EFFECTS
+   ═══════════════════════════════════════════ */
+
+.img-reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.img-reveal.revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Ken Burns subtle zoom */
+.img-ken-burns {
+  animation: none;
+  transition: transform 8s ease-out;
+}
+
+.img-ken-burns:hover {
+  transform: scale(1.08);
+}
+
+/* ═══════════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════════ */
+
+.card-tilt {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-tilt:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -15px rgba(13, 13, 13, 0.15);
+}
+
+/* ═══════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--creme);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gris-pierre);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--olive);
+}
