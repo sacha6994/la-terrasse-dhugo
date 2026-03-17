@@ -1,16 +1,38 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ChevronDown, Phone, UtensilsCrossed } from "lucide-react"
+import { ChevronDown, Phone } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+
+function TextReveal({ text, delay = 0, isVisible = false }: { text: string; delay?: number; isVisible?: boolean }) {
+  return (
+    <span aria-label={text}>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className={`inline-block transition-all duration-500 ${
+            isVisible
+              ? "translate-y-0 opacity-100 blur-0"
+              : "translate-y-5 opacity-0 blur-[4px]"
+          }`}
+          style={{
+            transitionDelay: isVisible ? `${delay + i * 35}ms` : "0ms",
+          }}
+          aria-hidden="true"
+        >
+          {char === " " ? "\u00A0" : char}
+        </span>
+      ))}
+    </span>
+  )
+}
 
 export function Hero() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    // Slight delay so the page paints before animations start
-    const t = setTimeout(() => setLoaded(true), 100)
+    const t = setTimeout(() => setLoaded(true), 1300) // After page loader
     return () => clearTimeout(t)
   }, [])
 
@@ -19,8 +41,23 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
     >
-      {/* Background Image with parallax-style overlay */}
+      {/* Video Background with fallback image */}
       <div className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2574&auto=format&fit=crop"
+          className="hero-video"
+        >
+          {/* Free stock video — terrasse restaurant ambiance */}
+          <source
+            src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4"
+            type="video/mp4"
+          />
+        </video>
+        {/* Fallback image for browsers that don't support video */}
         <Image
           src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2574&auto=format&fit=crop"
           alt="Terrasse du restaurant La Terrasse d'Hugo"
@@ -30,11 +67,6 @@ export function Hero() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-noir/70 via-noir/50 to-noir/80" />
-      </div>
-
-      {/* Decorative floating elements */}
-      <div className="absolute left-10 top-1/4 hidden opacity-20 lg:block">
-        <UtensilsCrossed className="h-16 w-16 animate-float text-or-ambre" strokeWidth={1} />
       </div>
 
       {/* Content */}
@@ -50,25 +82,24 @@ export function Hero() {
           </span>
         </div>
 
-        {/* Main title */}
-        <h1
-          className={`font-serif text-5xl font-semibold tracking-tight text-creme transition-all duration-1000 delay-200 md:text-7xl lg:text-8xl ${
-            loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-        >
-          <span className="text-balance">La Terrasse d&apos;Hugo</span>
+        {/* Main title — letter-by-letter reveal */}
+        <h1 className="font-serif text-5xl font-semibold tracking-tight text-creme md:text-7xl lg:text-8xl">
+          <TextReveal text="La Terrasse" delay={400} isVisible={loaded} />
+          <br className="hidden sm:block" />
+          <span className="sm:hidden"> </span>
+          <TextReveal text="d'Hugo" delay={800} isVisible={loaded} />
         </h1>
 
         {/* Animated divider */}
         <div
-          className={`mx-auto mt-6 h-px bg-or-ambre transition-all duration-1000 delay-500 ${
+          className={`mx-auto mt-6 h-px bg-or-ambre transition-all duration-1000 delay-1000 ${
             loaded ? "w-32 opacity-100" : "w-0 opacity-0"
           }`}
         />
 
         {/* Subtitle */}
         <p
-          className={`mt-4 font-sans text-lg font-medium uppercase tracking-[0.3em] text-creme/80 transition-all duration-1000 delay-300 md:text-xl ${
+          className={`mt-4 font-sans text-lg font-medium uppercase tracking-[0.3em] text-creme/80 transition-all duration-1000 delay-[1100ms] md:text-xl ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
@@ -77,7 +108,7 @@ export function Hero() {
 
         {/* Quote */}
         <p
-          className={`mx-auto mt-8 max-w-xl font-serif text-xl text-creme/90 transition-all duration-1000 delay-500 md:text-2xl ${
+          className={`mx-auto mt-8 max-w-xl font-serif text-xl italic text-creme/90 transition-all duration-1000 delay-[1300ms] md:text-2xl ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
@@ -86,7 +117,7 @@ export function Hero() {
 
         {/* CTA Buttons */}
         <div
-          className={`mt-12 flex flex-col items-center justify-center gap-4 transition-all duration-1000 delay-700 sm:flex-row ${
+          className={`mt-12 flex flex-col items-center justify-center gap-4 transition-all duration-1000 delay-[1500ms] sm:flex-row ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
@@ -110,7 +141,7 @@ export function Hero() {
       {/* Scroll Indicator */}
       <Link
         href="#concept"
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-1000 ${
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-[1800ms] ${
           loaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
         }`}
         aria-label="Défiler vers le bas"

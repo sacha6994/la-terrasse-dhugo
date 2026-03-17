@@ -403,3 +403,84 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--olive);
 }
+
+/* ═══════════════════════════════════════════
+   MARQUEE
+   ═══════════════════════════════════════════ */
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ═══════════════════════════════════════════
+   TEXT REVEAL (letter-by-letter)
+   ═══════════════════════════════════════════ */
+
+@keyframes text-reveal-char {
+  from {
+    opacity: 0;
+    transform: translateY(20px) rotate(4deg);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+    filter: blur(0px);
+  }
+}
+
+.text-reveal-char {
+  display: inline-block;
+  opacity: 0;
+  animation: text-reveal-char 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ═══════════════════════════════════════════
+   LENIS SMOOTH SCROLL
+   ═══════════════════════════════════════════ */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   VIDEO HERO
+   ═══════════════════════════════════════════ */
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR HIDE ON INTERACTIVE
+   ═══════════════════════════════════════════ */
+
+a, button, [role="button"], input, textarea, select {
+  cursor: none !important;
+}
