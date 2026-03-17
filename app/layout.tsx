@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Cormorant_Garamond, DM_Sans, Caveat } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
@@ -23,6 +23,12 @@ const caveat = Caveat({
   variable: "--font-handwritten",
   display: "swap",
 })
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export const metadata: Metadata = {
   title: "La Terrasse d'Hugo | Restaurant & Pub à Rodez — Face au Musée Soulages",

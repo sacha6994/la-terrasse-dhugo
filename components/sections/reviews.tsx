@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { useInView } from "@/hooks/use-in-view"
@@ -52,18 +52,18 @@ function AnimatedCounter({ target, duration = 1500 }: { target: number; duration
 }
 
 export function Reviews() {
-  const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.15 })
+  const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.1 })
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const scroll = (dir: number) => {
     if (!scrollRef.current) return
-    scrollRef.current.scrollBy({ left: dir * 320, behavior: "smooth" })
+    scrollRef.current.scrollBy({ left: dir * 300, behavior: "smooth" })
   }
 
   return (
     <section id="avis" ref={ref} className="bg-olive py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header + Rating inline */}
+        {/* Header + Rating */}
         <div
           className={`flex flex-col items-center gap-4 text-center transition-all duration-700 md:flex-row md:justify-between md:text-left ${
             isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
@@ -88,22 +88,20 @@ export function Reviews() {
           </div>
         </div>
 
-        {/* Reviews — horizontal carousel */}
-        <div className="relative mt-10">
+        {/* ═══ MOBILE: Carousel horizontal ═══ */}
+        <div className="relative mt-10 md:hidden">
           <div
             ref={scrollRef}
-            className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
           >
             {reviews.map((review, index) => (
               <div
                 key={review.author}
-                className={`group relative min-w-[300px] flex-shrink-0 snap-center rounded-lg bg-creme/10 p-6 backdrop-blur-sm transition-all duration-700 hover:bg-creme/15 ${
+                className={`group relative min-w-[280px] flex-shrink-0 snap-center rounded-lg bg-creme/10 p-6 backdrop-blur-sm transition-all duration-700 ${
                   isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 }`}
                 style={{ transitionDelay: `${200 + index * 100}ms` }}
               >
-                <div className="absolute left-0 top-0 h-full w-1 rounded-l-lg bg-or-ambre/0 transition-all duration-500 group-hover:bg-or-ambre/60" />
-                <Quote className="absolute right-4 top-4 h-8 w-8 text-or-ambre/15" />
                 <div className="flex gap-0.5">
                   {[...Array(review.rating)].map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-or-ambre text-or-ambre" />
@@ -116,30 +114,115 @@ export function Reviews() {
               </div>
             ))}
           </div>
-
-          {/* Scroll arrows — desktop only */}
-          <button
-            onClick={() => scroll(-1)}
-            className="absolute -left-3 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-creme/10 text-creme backdrop-blur-sm transition-all hover:bg-creme/20 md:flex"
-            aria-label="Avis précédents"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            onClick={() => scroll(1)}
-            className="absolute -right-3 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-creme/10 text-creme backdrop-blur-sm transition-all hover:bg-creme/20 md:flex"
-            aria-label="Avis suivants"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
         </div>
 
-        {/* CTA */}
-        <div
-          className={`mt-8 text-center transition-all duration-700 delay-400 ${
-            isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-        >
+        {/* ═══ DESKTOP: Layout dispersé innovant ═══ */}
+        <div className="relative mt-10 hidden md:block">
+          <div className="grid grid-cols-12 grid-rows-2 gap-4" style={{ minHeight: "320px" }}>
+            {/* Grande carte principale — haut gauche */}
+            <div
+              className={`col-span-5 row-span-2 group relative overflow-hidden rounded-xl bg-creme/10 p-8 backdrop-blur-sm transition-all duration-700 hover:bg-creme/15 ${
+                isInView ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
+              }`}
+              style={{ transitionDelay: "200ms" }}
+            >
+              <Quote className="absolute -right-2 -top-2 h-24 w-24 text-or-ambre/10 transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute left-0 top-0 h-full w-1 bg-or-ambre/0 transition-all duration-500 group-hover:bg-or-ambre" />
+              <div className="flex gap-0.5">
+                {[...Array(reviews[0].rating)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-or-ambre text-or-ambre" />
+                ))}
+              </div>
+              <p className="mt-6 font-serif text-2xl leading-relaxed text-creme">
+                &ldquo;{reviews[0].text}&rdquo;
+              </p>
+              <p className="mt-6 font-sans text-sm font-medium text-or-ambre">— {reviews[0].author}</p>
+            </div>
+
+            {/* Cartes empilées — haut droite */}
+            <div
+              className={`col-span-4 group relative overflow-hidden rounded-xl bg-creme/8 p-6 backdrop-blur-sm transition-all duration-700 hover:bg-creme/15 ${
+                isInView ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
+              }`}
+              style={{ transitionDelay: "350ms" }}
+            >
+              <div className="absolute left-0 top-0 h-1 w-full bg-or-ambre/0 transition-all duration-500 group-hover:bg-or-ambre/60" />
+              <div className="flex gap-0.5">
+                {[...Array(reviews[1].rating)].map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-or-ambre text-or-ambre" />
+                ))}
+              </div>
+              <p className="mt-3 font-serif text-base leading-relaxed text-creme">
+                &ldquo;{reviews[1].text}&rdquo;
+              </p>
+              <p className="mt-3 font-sans text-xs font-medium text-or-ambre">— {reviews[1].author}</p>
+            </div>
+
+            {/* Carte décalée — haut droite extrême */}
+            <div
+              className={`col-span-3 group relative overflow-hidden rounded-xl bg-or-ambre/10 p-6 backdrop-blur-sm transition-all duration-700 hover:bg-or-ambre/20 ${
+                isInView ? "translate-x-0 rotate-0 opacity-100" : "translate-x-10 rotate-2 opacity-0"
+              }`}
+              style={{ transitionDelay: "500ms" }}
+            >
+              <div className="flex gap-0.5">
+                {[...Array(reviews[2].rating)].map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-or-ambre text-or-ambre" />
+                ))}
+              </div>
+              <p className="mt-3 font-serif text-sm leading-relaxed text-creme">
+                &ldquo;{reviews[2].text}&rdquo;
+              </p>
+              <p className="mt-3 font-sans text-xs font-medium text-or-ambre">— {reviews[2].author}</p>
+            </div>
+
+            {/* Carte basse — centrée, légèrement décalée */}
+            <div
+              className={`col-span-4 col-start-6 group relative overflow-hidden rounded-xl bg-creme/8 p-6 backdrop-blur-sm transition-all duration-700 hover:bg-creme/15 ${
+                isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              }`}
+              style={{ transitionDelay: "650ms" }}
+            >
+              <div className="absolute bottom-0 right-0 h-1 w-full bg-or-ambre/0 transition-all duration-500 group-hover:bg-or-ambre/40" />
+              <div className="flex gap-0.5">
+                {[...Array(reviews[3].rating)].map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-or-ambre text-or-ambre" />
+                ))}
+              </div>
+              <p className="mt-3 font-serif text-base leading-relaxed text-creme">
+                &ldquo;{reviews[3].text}&rdquo;
+              </p>
+              <p className="mt-3 font-sans text-xs font-medium text-or-ambre">— {reviews[3].author}</p>
+            </div>
+
+            {/* CTA intégré dans la grille */}
+            <div
+              className={`col-span-3 col-start-10 flex items-center justify-center transition-all duration-700 ${
+                isInView ? "scale-100 opacity-100" : "scale-90 opacity-0"
+              }`}
+              style={{ transitionDelay: "800ms" }}
+            >
+              <Link
+                href="https://www.google.com/maps/place/La+Terrasse+d'Hugo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-hover-lift flex flex-col items-center gap-3 rounded-xl border border-creme/20 px-6 py-6 text-center transition-all duration-300 hover:border-or-ambre/40 hover:bg-creme/5"
+              >
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-or-ambre/30 text-or-ambre/30" />
+                  ))}
+                </div>
+                <span className="font-sans text-xs font-semibold uppercase tracking-wider text-creme/60">
+                  Laisser<br />un avis
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile CTA */}
+        <div className="mt-8 text-center md:hidden">
           <Link
             href="https://www.google.com/maps/place/La+Terrasse+d'Hugo"
             target="_blank"

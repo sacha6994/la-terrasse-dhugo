@@ -12,50 +12,34 @@ import { GrainOverlay } from "@/components/grain-overlay"
 import { Marquee } from "@/components/marquee"
 import { WaveDivider } from "@/components/wave-divider"
 import { FloatingCTA } from "@/components/floating-cta"
+import { NightModeProvider, NightModeToggle } from "@/components/night-mode"
 
 export default function Home() {
   return (
-    <>
+    <NightModeProvider>
       {/* Premium effects layer */}
       <SmoothScroll />
       <GrainOverlay />
       <FloatingCTA />
+      <NightModeToggle />
 
       <Header />
-      <main>
+      <main className="overflow-x-hidden">
         <Hero />
-
-        {/* Hero → Concept (noir → crème) */}
         <WaveDivider from="noir" to="creme" />
-
         <Concept />
-
-        {/* Marquee separator */}
         <Marquee />
-
         <Carte />
-
-        {/* Carte → Galerie (noir → crème) */}
         <WaveDivider from="noir" to="creme" />
-
         <Gallery />
-
-        {/* Galerie → Avis (crème → olive) */}
         <WaveDivider from="creme" to="olive" />
-
         <Reviews />
-
-        {/* Avis → Infos (olive → crème-light) */}
         <WaveDivider from="olive" to="creme-light" />
-
         <Info />
-
-        {/* Infos → Réservation (crème-light → noir) */}
         <WaveDivider from="creme-light" to="noir" />
-
         <Reservation />
       </main>
       <Footer />
-    </>
+    </NightModeProvider>
   )
 }

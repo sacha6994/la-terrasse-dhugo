@@ -13,7 +13,7 @@ const items = [
 
 export function Marquee() {
   return (
-    <div className="relative overflow-hidden bg-noir py-4" aria-hidden="true">
+    <div className="relative overflow-hidden bg-noir py-4 max-w-[100vw]" aria-hidden="true">
       {/* Fade edges */}
       <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-noir to-transparent" />
       <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-noir to-transparent" />

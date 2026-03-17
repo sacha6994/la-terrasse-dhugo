@@ -88,7 +88,7 @@
   }
 
   body {
-    @apply bg-creme text-noir;
+    @apply bg-creme text-noir overflow-x-hidden;
   }
 
   ::selection {
@@ -414,6 +414,117 @@
   }
   100% {
     transform: translateX(-33.333%);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   NIGHT MODE — Ambiance bar/restaurant
+   ═══════════════════════════════════════════ */
+
+.night-mode {
+  --noir: #080605;
+  --creme: #1a1410;
+  --creme-light: #1e1812;
+  --gris-pierre: #8a7a65;
+  --or-ambre: #e8a84c;
+  --olive: #2a3020;
+  --olive-light: #3a4530;
+  --background: var(--creme);
+  --foreground: #f0e6d8;
+  transition: all 0.8s ease;
+}
+
+/* Warm tint on all images */
+.night-mode img,
+.night-mode video {
+  filter: sepia(0.15) saturate(1.3) brightness(0.85) hue-rotate(-5deg);
+  transition: filter 0.8s ease;
+}
+
+.night-mode img:hover,
+.night-mode video:hover {
+  filter: sepia(0.1) saturate(1.5) brightness(0.95) hue-rotate(-5deg);
+}
+
+/* Red/amber glow on images */
+.night-mode .gallery-img,
+.night-mode [data-night-glow] {
+  box-shadow: 0 0 30px -5px rgba(200, 80, 30, 0.25),
+              0 0 60px -10px rgba(200, 100, 40, 0.1);
+}
+
+/* Warm body tint */
+.night-mode body {
+  background-color: #0e0b08;
+  color: #f0e6d8;
+}
+
+/* Sections background override */
+.night-mode .bg-creme { background-color: #1a1410; }
+.night-mode .bg-creme-light { background-color: #1e1812; }
+.night-mode .bg-noir { background-color: #080605; }
+.night-mode .bg-olive { background-color: #1a2010; }
+
+/* Text adjustments */
+.night-mode .text-noir { color: #f0e6d8; }
+.night-mode .text-gris-pierre { color: #a0907a; }
+.night-mode .text-creme { color: #f5efe5; }
+
+/* Ambient light glow on cards */
+.night-mode .card-tilt:hover,
+.night-mode .group:hover .night-card-glow {
+  box-shadow: 0 10px 40px -10px rgba(200, 80, 30, 0.3);
+}
+
+/* Scrollbar night */
+.night-mode ::-webkit-scrollbar-track { background: #0e0b08; }
+.night-mode ::-webkit-scrollbar-thumb { background: #4a3a28; }
+
+/* Map warm filter */
+.night-mode iframe { filter: sepia(0.2) saturate(1.2) brightness(0.8) hue-rotate(-10deg); }
+
+/* Ambient red light effect — pseudo-element on sections */
+.night-mode section {
+  position: relative;
+}
+
+.night-mode section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 80%, rgba(180, 60, 20, 0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(200, 100, 30, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Wave dividers night */
+.night-mode svg path {
+  transition: fill 0.8s ease;
+}
+
+/* Button glow in night mode */
+.night-mode .btn-shimmer::after {
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(200, 100, 30, 0.2) 45%,
+    rgba(200, 100, 30, 0.2) 55%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+}
+
+.night-mode .animate-pulse-glow {
+  animation-name: pulse-glow-night;
+}
+
+@keyframes pulse-glow-night {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(200, 80, 30, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 25px 8px rgba(200, 80, 30, 0.2);
   }
 }
 
