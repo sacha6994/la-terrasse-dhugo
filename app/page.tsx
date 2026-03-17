@@ -13,6 +13,7 @@ import { Marquee } from "@/components/marquee"
 import { WaveDivider } from "@/components/wave-divider"
 import { FloatingCTA } from "@/components/floating-cta"
 import { NightModeProvider, NightModeToggle } from "@/components/night-mode"
+import { RegisterSW } from "@/components/register-sw"
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <GrainOverlay />
       <FloatingCTA />
       <NightModeToggle />
+      <RegisterSW />
 
       <Header />
       <main className="overflow-x-hidden">
