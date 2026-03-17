@@ -14,11 +14,24 @@ export function useNightMode() {
 
 export function NightModeProvider({ children }: { children: React.ReactNode }) {
   const [isNight, setIsNight] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const hour = new Date().getHours()
-    if (hour >= 20 || hour < 7) setIsNight(true)
+    setMounted(true)
+    const saved = localStorage.getItem("terrasse-night-mode")
+    if (saved !== null) {
+      setIsNight(saved === "true")
+    } else {
+      const hour = new Date().getHours()
+      if (hour >= 20 || hour < 7) setIsNight(true)
+    }
   }, [])
+
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem("terrasse-night-mode", String(isNight))
+    }
+  }, [isNight, mounted])
 
   return (
     <NightModeContext.Provider value={{ isNight, toggle: () => setIsNight((p) => !p) }}>

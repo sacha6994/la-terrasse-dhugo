@@ -426,35 +426,38 @@
 
 .night-mode {
   --noir: #000000;
-  --creme: #0a0a0a;
-  --creme-light: #0e0e0e;
-  --gris-pierre: #777;
+  --creme: #080808;
+  --creme-light: #0c0c0c;
+  --gris-pierre: #999;
   --or-ambre: #e8a84c;
   --cuivre: #d4a054;
-  --olive: #1a2610;
-  --olive-light: #283a1a;
+  --olive: #0d1508;
+  --olive-light: #1a2610;
   --background: #000000;
-  --foreground: #e8e0d4;
+  --foreground: #ede5d8;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
   transition: all 0.6s ease;
 }
 
 /* ── Body ── */
 .night-mode body {
   background-color: #000 !important;
-  color: #e8e0d4;
+  color: #ede5d8;
 }
 
-/* ── Sections — tout noir ── */
-.night-mode .bg-creme      { background-color: #0a0a0a !important; }
-.night-mode .bg-creme-light { background-color: #0e0e0e !important; }
+/* ── Sections — noir total ── */
+.night-mode .bg-creme      { background-color: #080808 !important; }
+.night-mode .bg-creme-light { background-color: #0c0c0c !important; }
 .night-mode .bg-noir        { background-color: #000000 !important; }
-.night-mode .bg-olive       { background-color: #080c06 !important; }
+.night-mode .bg-olive       { background-color: #060a04 !important; }
 
-/* ── Texte — contraste fort sur noir ── */
-.night-mode .text-noir        { color: #f0e8dc !important; }
-.night-mode .text-gris-pierre { color: #999 !important; }
+/* ── Texte — contraste maximum sur noir ── */
+.night-mode .text-noir        { color: #f5ede0 !important; }
+.night-mode .text-gris-pierre { color: #aaa !important; }
 .night-mode .text-creme       { color: #fff !important; }
 .night-mode .text-or-ambre    { color: #f0b060 !important; }
+.night-mode .text-olive       { color: #8ab065 !important; }
 
 /* ── Borders visibles ── */
 .night-mode .border-noir\/10,
@@ -470,13 +473,14 @@
   transition: filter 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* ✦ GLOW on image hover ✦ */
+/* ✦ GLOW on image hover — lumière cinématique ✦ */
 .night-mode img:hover,
 .night-mode video:hover {
-  filter: brightness(0.9) saturate(1.4) sepia(0.05);
+  filter: brightness(0.92) saturate(1.35) sepia(0.04);
   box-shadow:
-    0 0 30px rgba(232, 168, 76, 0.2),
-    0 0 60px rgba(200, 80, 30, 0.1);
+    0 0 40px rgba(232, 168, 76, 0.25),
+    0 0 80px rgba(200, 80, 30, 0.12),
+    0 0 120px rgba(232, 168, 76, 0.05);
 }
 
 /* ── Map ── */
@@ -488,15 +492,16 @@
   filter: brightness(0.8) saturate(1) sepia(0.1);
 }
 
-/* ── Cards — glow au hover ── */
+/* ── Cards — glow lumineux au hover ── */
 .night-mode .card-tilt:hover {
   box-shadow:
-    0 0 20px rgba(232, 168, 76, 0.15),
-    0 8px 30px rgba(0, 0, 0, 0.6) !important;
+    0 0 30px rgba(232, 168, 76, 0.2),
+    0 0 60px rgba(200, 80, 30, 0.08),
+    0 10px 40px rgba(0, 0, 0, 0.6) !important;
 }
 
 .night-mode .group:hover {
-  --tw-shadow: 0 0 20px rgba(232, 168, 76, 0.1);
+  --tw-shadow: 0 0 25px rgba(232, 168, 76, 0.12);
 }
 
 /* ── Rounded cards bg ── */
@@ -522,28 +527,30 @@
   background-color: rgba(232, 168, 76, 0.08) !important;
 }
 
-/* ── Buttons — amber glow on hover ── */
+/* ── Buttons — amber glow brillant on hover ── */
 .night-mode .btn-hover-lift:hover {
   box-shadow:
-    0 0 20px rgba(232, 168, 76, 0.3),
-    0 8px 25px rgba(0, 0, 0, 0.5) !important;
+    0 0 30px rgba(232, 168, 76, 0.4),
+    0 0 60px rgba(200, 80, 30, 0.12),
+    0 10px 30px rgba(0, 0, 0, 0.5) !important;
 }
 
 .night-mode .btn-hover-lift:active {
   box-shadow:
-    0 0 10px rgba(232, 168, 76, 0.4),
-    inset 0 0 15px rgba(232, 168, 76, 0.1) !important;
+    0 0 15px rgba(232, 168, 76, 0.5),
+    0 0 40px rgba(232, 168, 76, 0.15),
+    inset 0 0 20px rgba(232, 168, 76, 0.12) !important;
 }
 
-/* Shimmer — warm light streak */
+/* Shimmer — rayon de lumière dorée */
 .night-mode .btn-shimmer::after {
   background: linear-gradient(
     105deg,
-    transparent 38%,
-    rgba(232, 168, 76, 0.25) 44%,
-    rgba(255, 200, 100, 0.15) 50%,
-    rgba(232, 168, 76, 0.25) 56%,
-    transparent 62%
+    transparent 34%,
+    rgba(232, 168, 76, 0.35) 42%,
+    rgba(255, 220, 130, 0.25) 50%,
+    rgba(232, 168, 76, 0.35) 58%,
+    transparent 66%
   ) !important;
   background-size: 200% 100%;
 }
@@ -559,12 +566,13 @@
   }
   50% {
     box-shadow:
-      0 0 25px 8px rgba(232, 168, 76, 0.15),
-      0 0 50px 15px rgba(200, 80, 30, 0.08);
+      0 0 30px 10px rgba(232, 168, 76, 0.2),
+      0 0 60px 20px rgba(200, 80, 30, 0.1),
+      0 0 90px 30px rgba(232, 168, 76, 0.04);
   }
 }
 
-/* ── Ambient lights on sections ── */
+/* ── Ambient lights on sections — lueurs chaudes ── */
 .night-mode section {
   position: relative;
 }
@@ -574,9 +582,9 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 15% 85%, rgba(200, 80, 20, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 15%, rgba(232, 168, 76, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(180, 60, 20, 0.03) 0%, transparent 70%);
+    radial-gradient(ellipse at 10% 90%, rgba(200, 80, 20, 0.09) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 10%, rgba(232, 168, 76, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(180, 60, 20, 0.04) 0%, transparent 70%);
   pointer-events: none;
   z-index: 1;
 }
@@ -591,22 +599,22 @@
 
 /* ── Links glow on hover ── */
 .night-mode a:hover {
-  text-shadow: 0 0 12px rgba(232, 168, 76, 0.3);
+  text-shadow: 0 0 15px rgba(232, 168, 76, 0.35);
 }
 
 /* ── Social icons glow ── */
 .night-mode .hover\:scale-110:hover {
-  box-shadow: 0 0 15px rgba(232, 168, 76, 0.25) !important;
+  box-shadow: 0 0 20px rgba(232, 168, 76, 0.3) !important;
 }
 
-/* ── Divider lines ── */
+/* ── Divider lines — fil lumineux ── */
 .night-mode .bg-or-ambre {
-  box-shadow: 0 0 10px rgba(232, 168, 76, 0.3);
+  box-shadow: 0 0 12px rgba(232, 168, 76, 0.4);
 }
 
-/* ── Star icons ── */
+/* ── Star icons — étoiles brillantes ── */
 .night-mode .fill-or-ambre {
-  filter: drop-shadow(0 0 4px rgba(232, 168, 76, 0.4));
+  filter: drop-shadow(0 0 6px rgba(232, 168, 76, 0.5));
 }
 
 /* ── Header night ── */
@@ -620,8 +628,162 @@
 
 /* ── Selection ── */
 .night-mode ::selection {
-  background-color: rgba(232, 168, 76, 0.3);
+  background-color: rgba(232, 168, 76, 0.35);
   color: #fff;
+}
+
+/* ══════════════════════════════════════════════════
+   NIGHT MODE — Glow étendu, hover & lisibilité
+   ══════════════════════════════════════════════════ */
+
+/* ── Texte sur fond ambre : rester sombre ── */
+.night-mode .bg-or-ambre.text-noir,
+.night-mode .bg-or-ambre .text-noir,
+.night-mode .bg-cuivre.text-noir,
+.night-mode .bg-cuivre .text-noir {
+  color: #0d0d0d !important;
+}
+
+/* ── Texte opacités supplémentaires ── */
+.night-mode .text-creme\/60 { color: rgba(255, 255, 255, 0.65) !important; }
+.night-mode .text-creme\/70 { color: rgba(255, 255, 255, 0.78) !important; }
+.night-mode .text-creme\/80 { color: rgba(255, 255, 255, 0.88) !important; }
+.night-mode .text-creme\/90 { color: rgba(255, 255, 255, 0.94) !important; }
+.night-mode .text-or-ambre\/70 { color: rgba(240, 176, 96, 0.85) !important; }
+.night-mode .text-noir\/\[0\.03\] { color: rgba(232, 168, 76, 0.04) !important; }
+.night-mode strong { color: #fff !important; }
+
+/* ── Hover backgrounds ── */
+.night-mode .hover\:bg-creme\/10:hover { background-color: rgba(255, 255, 255, 0.08) !important; }
+.night-mode .hover\:bg-creme\/15:hover { background-color: rgba(255, 255, 255, 0.1) !important; }
+.night-mode .hover\:bg-olive\/10:hover { background-color: rgba(232, 168, 76, 0.1) !important; }
+.night-mode .hover\:bg-olive\/20:hover { background-color: rgba(232, 168, 76, 0.14) !important; }
+.night-mode .hover\:bg-or-ambre\/10:hover { background-color: rgba(232, 168, 76, 0.12) !important; }
+.night-mode .hover\:bg-noir:hover { background-color: rgba(232, 168, 76, 0.1) !important; }
+
+/* ── Group-hover backgrounds ── */
+.night-mode .group:hover .group-hover\:bg-olive\/20 {
+  background-color: rgba(232, 168, 76, 0.14) !important;
+}
+.night-mode .group:hover .group-hover\:scale-110 {
+  filter: drop-shadow(0 0 8px rgba(232, 168, 76, 0.3));
+}
+
+/* ── Borders supplémentaires ── */
+.night-mode .border-noir\/15 { border-color: rgba(255, 255, 255, 0.1) !important; }
+.night-mode .border-noir\/20 { border-color: rgba(255, 255, 255, 0.12) !important; }
+.night-mode .border-creme { border-color: rgba(255, 255, 255, 0.12) !important; }
+.night-mode .hover\:border-noir:hover { border-color: rgba(232, 168, 76, 0.5) !important; }
+.night-mode .hover\:border-creme:hover { border-color: rgba(232, 168, 76, 0.4) !important; }
+.night-mode .hover\:border-or-ambre:hover { border-color: var(--or-ambre) !important; }
+.night-mode .hover\:border-or-ambre\/40:hover { border-color: rgba(232, 168, 76, 0.6) !important; }
+
+/* ── Hover text ── */
+.night-mode .hover\:text-or-ambre:hover { color: #f0b060 !important; }
+.night-mode .hover\:text-noir:hover { color: #f0b060 !important; }
+
+/* ══════════ SHADOWS → WARM GLOWS ══════════ */
+.night-mode .shadow-sm {
+  box-shadow: 0 0 15px rgba(232, 168, 76, 0.04), 0 1px 6px rgba(0, 0, 0, 0.4) !important;
+}
+.night-mode .shadow-lg {
+  box-shadow: 0 0 25px rgba(232, 168, 76, 0.06), 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}
+.night-mode .shadow-xl {
+  box-shadow: 0 0 30px rgba(232, 168, 76, 0.08), 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+.night-mode .shadow-2xl {
+  box-shadow: 0 0 40px rgba(232, 168, 76, 0.1), 0 12px 35px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ══════════ GALERIE — Slides cinématiques ══════════ */
+.night-mode #galerie .group {
+  transition: box-shadow 0.5s ease, transform 0.5s ease !important;
+}
+.night-mode #galerie .group:hover {
+  box-shadow:
+    0 0 40px rgba(232, 168, 76, 0.22),
+    0 0 80px rgba(200, 80, 30, 0.1) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* ══════════ CARTE — Spécialités glow chaud ══════════ */
+.night-mode #carte .group {
+  transition: box-shadow 0.5s ease !important;
+}
+.night-mode #carte .group:hover {
+  box-shadow:
+    0 0 35px rgba(232, 168, 76, 0.22),
+    0 0 70px rgba(200, 80, 30, 0.1) !important;
+}
+.night-mode #carte button:hover {
+  box-shadow: 0 0 15px rgba(232, 168, 76, 0.15);
+}
+
+/* ══════════ AVIS — Témoignages lumineux ══════════ */
+.night-mode #avis .group:hover {
+  box-shadow:
+    0 0 30px rgba(232, 168, 76, 0.18),
+    0 0 60px rgba(200, 80, 30, 0.08) !important;
+}
+
+/* ══════════ INFOS — Cartes pratiques ══════════ */
+.night-mode #infos .rounded-xl {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+.night-mode #infos .rounded-xl:hover {
+  border-color: rgba(232, 168, 76, 0.2);
+  box-shadow: 0 0 25px rgba(232, 168, 76, 0.1);
+}
+.night-mode #infos .rounded-lg:hover {
+  box-shadow: 0 0 15px rgba(232, 168, 76, 0.08);
+}
+
+/* ══════════ CONCEPT — Highlights glow ══════════ */
+.night-mode #concept .group:hover {
+  box-shadow:
+    0 0 25px rgba(232, 168, 76, 0.15),
+    0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+.night-mode #concept .rounded-2xl.bg-noir {
+  box-shadow: 0 0 30px rgba(232, 168, 76, 0.08);
+}
+.night-mode #concept .border-creme {
+  border-color: rgba(232, 168, 76, 0.2) !important;
+}
+
+/* ══════════ RESERVATION — CTA nuit ══════════ */
+.night-mode #reservation .hover\:bg-creme\/10:hover {
+  background-color: rgba(232, 168, 76, 0.08) !important;
+  box-shadow: 0 0 20px rgba(232, 168, 76, 0.15);
+}
+
+/* ══════════ IFRAME (MAP) — mode nuit ══════════ */
+.night-mode .grayscale {
+  filter: grayscale(1) brightness(0.5) sepia(0.2) !important;
+}
+.night-mode .hover\:grayscale-0:hover {
+  filter: grayscale(0) brightness(0.7) saturate(0.85) sepia(0.1) !important;
+}
+
+/* ══════════ FLOATING CTA — nuit ══════════ */
+.night-mode .shadow-or-ambre\/30 {
+  box-shadow: 0 0 35px rgba(232, 168, 76, 0.35), 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ══════════ AMBIENT LIGHT PULSE ══════════ */
+@keyframes ambient-pulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+.night-mode section::after {
+  animation: ambient-pulse 8s ease-in-out infinite alternate;
+}
+
+/* ══════════ DECORATIVE TEXT — Reflet ambre ══════════ */
+.night-mode [class*="text-noir"][class*="0.03"] {
+  color: rgba(232, 168, 76, 0.04) !important;
 }
 
 .animate-marquee {
