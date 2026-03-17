@@ -1,9 +1,9 @@
 "use client"
 
-import { Instagram, X } from "lucide-react"
+import { Instagram, X, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { useInView } from "@/hooks/use-in-view"
 
 const galleryImages = [
@@ -43,64 +43,81 @@ export function Gallery() {
   const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.1 })
   const [lightbox, setLightbox] = useState<number | null>(null)
 
+  const navigate = useCallback((dir: 1 | -1) => {
+    if (lightbox === null) return
+    setLightbox((lightbox + dir + galleryImages.length) % galleryImages.length)
+  }, [lightbox])
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (lightbox === null) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null)
+      if (e.key === "ArrowRight") navigate(1)
+      if (e.key === "ArrowLeft") navigate(-1)
+    }
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", handleKey)
+    return () => {
+      document.body.style.overflow = ""
+      window.removeEventListener("keydown", handleKey)
+    }
+  }, [lightbox, navigate])
+
   return (
     <>
-      <section id="galerie" ref={ref} className="bg-creme py-24 md:py-32">
+      <section id="galerie" ref={ref} className="bg-creme py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
+          {/* Header */}
           <div
             className={`mx-auto max-w-3xl text-center transition-all duration-700 ${
               isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
             }`}
           >
-            <span className="font-handwritten text-xl text-or-ambre md:text-2xl">En images</span>
-            <h2 className="mt-2 font-serif text-4xl font-semibold text-noir md:text-5xl lg:text-6xl">
+            <span className="font-handwritten text-xl text-or-ambre">En images</span>
+            <h2 className="mt-2 font-serif text-3xl font-semibold text-noir md:text-4xl lg:text-5xl">
               Notre Galerie
             </h2>
             <div
-              className={`mx-auto mt-6 h-px bg-or-ambre transition-all duration-1000 delay-300 ${
-                isInView ? "w-24 opacity-100" : "w-0 opacity-0"
+              className={`mx-auto mt-4 h-px bg-or-ambre transition-all duration-1000 delay-300 ${
+                isInView ? "w-20 opacity-100" : "w-0 opacity-0"
               }`}
             />
           </div>
 
-          {/* Gallery Grid */}
-          <div className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {/* Horizontal scroll gallery on mobile, grid on desktop */}
+          <div className="-mx-4 mt-10 flex gap-3 overflow-x-auto px-4 pb-4 snap-x snap-mandatory scrollbar-hide md:mx-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0 md:pb-0">
             {galleryImages.map((image, index) => (
               <button
                 key={image.caption}
                 onClick={() => setLightbox(index)}
-                className={`group relative overflow-hidden rounded-lg transition-all duration-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-or-ambre ${
+                className={`group relative min-w-[240px] flex-shrink-0 snap-center overflow-hidden rounded-lg md:min-w-0 transition-all duration-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-or-ambre ${
                   isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                } ${index === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
-                style={{ transitionDelay: `${200 + index * 120}ms` }}
+                }`}
+                style={{ transitionDelay: `${200 + index * 80}ms` }}
                 aria-label={`Voir ${image.caption} en grand`}
               >
-                <div
-                  className={`overflow-hidden ${index === 0 ? "aspect-square md:aspect-auto md:h-full min-h-[300px]" : "aspect-square"}`}
-                >
+                <div className="relative aspect-square overflow-hidden">
                   <Image
                     src={image.src}
                     alt={image.alt}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes={index === 0 ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
+                    sizes="(max-width: 768px) 240px, 33vw"
                   />
                 </div>
-                {/* Hover overlay with slide-up caption */}
-                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-noir/80 via-noir/20 to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100">
-                  <div className="w-full translate-y-4 p-6 transition-transform duration-500 group-hover:translate-y-0">
-                    <span className="font-serif text-xl text-creme">{image.caption}</span>
-                    <div className="mt-2 h-px w-0 bg-or-ambre transition-all duration-700 group-hover:w-16" />
+                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-noir/70 via-transparent to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100">
+                  <div className="w-full p-4">
+                    <span className="font-serif text-base text-creme">{image.caption}</span>
                   </div>
                 </div>
               </button>
             ))}
           </div>
 
-          {/* Instagram CTA */}
+          {/* Instagram */}
           <div
-            className={`mt-16 text-center transition-all duration-700 delay-500 ${
+            className={`mt-10 text-center transition-all duration-700 delay-400 ${
               isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
             }`}
           >
@@ -108,10 +125,10 @@ export function Gallery() {
               href="https://www.instagram.com/la_terrasse_d_hugo"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-hover-lift group inline-flex items-center gap-3 rounded-sm border-2 border-noir/20 px-8 py-4 font-sans text-sm font-semibold uppercase tracking-wider text-noir transition-all duration-300 hover:border-noir hover:bg-noir hover:text-creme"
+              className="btn-hover-lift group inline-flex items-center gap-3 rounded-sm border-2 border-noir/20 px-6 py-3 font-sans text-sm font-semibold uppercase tracking-wider text-noir transition-all duration-300 hover:border-noir hover:bg-noir hover:text-creme"
             >
-              <Instagram className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
-              Suivez-nous sur Instagram
+              <Instagram className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+              Suivez-nous
             </Link>
           </div>
         </div>
@@ -127,12 +144,12 @@ export function Gallery() {
         >
           <button
             onClick={() => setLightbox(null)}
-            className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-creme/10 text-creme transition-all duration-300 hover:bg-creme/20"
+            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-creme/10 text-creme transition-all duration-300 hover:bg-creme/20"
             aria-label="Fermer"
           >
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" />
           </button>
-          <div className="relative h-[80vh] w-full max-w-5xl animate-scale-up" onClick={(e) => e.stopPropagation()}>
+          <div className="relative h-[80vh] w-full max-w-4xl animate-scale-up" onClick={(e) => e.stopPropagation()}>
             <Image
               src={galleryImages[lightbox].src}
               alt={galleryImages[lightbox].alt}
@@ -140,30 +157,23 @@ export function Gallery() {
               className="rounded-lg object-contain"
               sizes="100vw"
             />
-            <p className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-sm bg-noir/80 px-6 py-2 font-serif text-lg text-creme backdrop-blur-sm">
+            <p className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-sm bg-noir/80 px-4 py-1.5 font-serif text-base text-creme backdrop-blur-sm">
               {galleryImages[lightbox].caption}
             </p>
           </div>
-          {/* Navigation arrows */}
           <button
-            onClick={(e) => {
-              e.stopPropagation()
-              setLightbox((lightbox - 1 + galleryImages.length) % galleryImages.length)
-            }}
-            className="absolute left-4 flex h-12 w-12 items-center justify-center rounded-full bg-creme/10 text-creme transition-all duration-300 hover:bg-creme/20"
-            aria-label="Image précédente"
+            onClick={(e) => { e.stopPropagation(); navigate(-1) }}
+            className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full bg-creme/10 text-creme transition-all hover:bg-creme/20"
+            aria-label="Précédent"
           >
-            <span className="text-2xl">&lsaquo;</span>
+            <ChevronLeft className="h-5 w-5" />
           </button>
           <button
-            onClick={(e) => {
-              e.stopPropagation()
-              setLightbox((lightbox + 1) % galleryImages.length)
-            }}
-            className="absolute right-4 flex h-12 w-12 items-center justify-center rounded-full bg-creme/10 text-creme transition-all duration-300 hover:bg-creme/20"
-            aria-label="Image suivante"
+            onClick={(e) => { e.stopPropagation(); navigate(1) }}
+            className="absolute right-3 flex h-10 w-10 items-center justify-center rounded-full bg-creme/10 text-creme transition-all hover:bg-creme/20"
+            aria-label="Suivant"
           >
-            <span className="text-2xl">&rsaquo;</span>
+            <ChevronRight className="h-5 w-5" />
           </button>
         </div>
       )}

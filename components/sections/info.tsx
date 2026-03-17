@@ -36,7 +36,7 @@ export function Info() {
   const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.1 })
 
   return (
-    <section id="infos" ref={ref} className="bg-creme-light py-24 md:py-32">
+    <section id="infos" ref={ref} className="bg-creme-light py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div

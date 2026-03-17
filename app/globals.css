@@ -421,6 +421,15 @@
   animation: marquee 30s linear infinite;
 }
 
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* ═══════════════════════════════════════════
    TEXT REVEAL (letter-by-letter)
    ═══════════════════════════════════════════ */

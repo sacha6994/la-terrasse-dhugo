@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Star, Quote } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { useInView } from "@/hooks/use-in-view"
 
@@ -53,85 +53,90 @@ function AnimatedCounter({ target, duration = 1500 }: { target: number; duration
 
 export function Reviews() {
   const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.15 })
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const scroll = (dir: number) => {
+    if (!scrollRef.current) return
+    scrollRef.current.scrollBy({ left: dir * 320, behavior: "smooth" })
+  }
 
   return (
-    <section id="avis" ref={ref} className="bg-olive py-24 md:py-32">
+    <section id="avis" ref={ref} className="bg-olive py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Header + Rating inline */}
         <div
-          className={`mx-auto max-w-3xl text-center transition-all duration-700 ${
+          className={`flex flex-col items-center gap-4 text-center transition-all duration-700 md:flex-row md:justify-between md:text-left ${
             isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <span className="font-handwritten text-xl text-or-ambre md:text-2xl">Témoignages</span>
-          <h2 className="mt-2 font-serif text-4xl font-semibold text-creme md:text-5xl lg:text-6xl">
-            Ce que nos clients en disent
-          </h2>
-          <div
-            className={`mx-auto mt-6 h-px bg-or-ambre transition-all duration-1000 delay-300 ${
-              isInView ? "w-24 opacity-100" : "w-0 opacity-0"
-            }`}
-          />
+          <div>
+            <span className="font-handwritten text-xl text-or-ambre">Témoignages</span>
+            <h2 className="mt-1 font-serif text-3xl font-semibold text-creme md:text-4xl lg:text-5xl">
+              Ce qu&apos;ils en disent
+            </h2>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-5 w-5 fill-or-ambre text-or-ambre" />
+              ))}
+            </div>
+            <span className="font-serif text-2xl font-semibold text-creme">
+              <AnimatedCounter target={4.5} />/5
+            </span>
+            <span className="text-sm text-creme/60">450+ avis</span>
+          </div>
         </div>
 
-        {/* Rating Badge — animated counter */}
-        <div
-          className={`mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8 transition-all duration-700 delay-200 ${
-            isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-        >
-          <div className="flex items-center gap-1">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`h-6 w-6 fill-or-ambre text-or-ambre transition-all duration-500 ${
-                  isInView ? "scale-100 opacity-100" : "scale-0 opacity-0"
+        {/* Reviews — horizontal carousel */}
+        <div className="relative mt-10">
+          <div
+            ref={scrollRef}
+            className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-4 snap-x snap-mandatory scrollbar-hide"
+          >
+            {reviews.map((review, index) => (
+              <div
+                key={review.author}
+                className={`group relative min-w-[300px] flex-shrink-0 snap-center rounded-lg bg-creme/10 p-6 backdrop-blur-sm transition-all duration-700 hover:bg-creme/15 ${
+                  isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 }`}
-                style={{ transitionDelay: `${400 + i * 100}ms` }}
-              />
+                style={{ transitionDelay: `${200 + index * 100}ms` }}
+              >
+                <div className="absolute left-0 top-0 h-full w-1 rounded-l-lg bg-or-ambre/0 transition-all duration-500 group-hover:bg-or-ambre/60" />
+                <Quote className="absolute right-4 top-4 h-8 w-8 text-or-ambre/15" />
+                <div className="flex gap-0.5">
+                  {[...Array(review.rating)].map((_, i) => (
+                    <Star key={i} className="h-3.5 w-3.5 fill-or-ambre text-or-ambre" />
+                  ))}
+                </div>
+                <p className="mt-3 font-serif text-base leading-relaxed text-creme">
+                  &ldquo;{review.text}&rdquo;
+                </p>
+                <p className="mt-3 font-sans text-sm font-medium text-or-ambre">— {review.author}</p>
+              </div>
             ))}
           </div>
-          <div className="text-center sm:text-left">
-            <span className="font-serif text-3xl font-semibold text-creme">
-              <AnimatedCounter target={4.5} />
-              /5
-            </span>
-            <span className="ml-2 font-sans text-creme/80">sur Google</span>
-            <span className="mx-2 text-creme/40">•</span>
-            <span className="font-sans text-creme/80">450+ avis</span>
-          </div>
-        </div>
 
-        {/* Reviews Grid — alternating slide directions */}
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
-          {reviews.map((review, index) => (
-            <div
-              key={review.author}
-              className={`group relative overflow-hidden rounded-lg bg-creme/10 p-8 backdrop-blur-sm transition-all duration-700 hover:bg-creme/15 ${
-                isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-              style={{ transitionDelay: `${300 + index * 120}ms` }}
-            >
-              {/* Decorative accent bar */}
-              <div className="absolute left-0 top-0 h-full w-1 bg-or-ambre/0 transition-all duration-500 group-hover:bg-or-ambre/60" />
-
-              <Quote className="absolute right-6 top-6 h-10 w-10 text-or-ambre/20 transition-transform duration-500 group-hover:scale-110 group-hover:text-or-ambre/30" />
-              <div className="flex gap-1">
-                {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-or-ambre text-or-ambre" />
-                ))}
-              </div>
-              <p className="mt-4 font-serif text-lg leading-relaxed text-creme">
-                &ldquo;{review.text}&rdquo;
-              </p>
-              <p className="mt-4 font-sans text-sm font-medium text-or-ambre">— {review.author}</p>
-            </div>
-          ))}
+          {/* Scroll arrows — desktop only */}
+          <button
+            onClick={() => scroll(-1)}
+            className="absolute -left-3 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-creme/10 text-creme backdrop-blur-sm transition-all hover:bg-creme/20 md:flex"
+            aria-label="Avis précédents"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            onClick={() => scroll(1)}
+            className="absolute -right-3 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-creme/10 text-creme backdrop-blur-sm transition-all hover:bg-creme/20 md:flex"
+            aria-label="Avis suivants"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
 
         {/* CTA */}
         <div
-          className={`mt-12 text-center transition-all duration-700 delay-500 ${
+          className={`mt-8 text-center transition-all duration-700 delay-400 ${
             isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
@@ -139,9 +144,9 @@ export function Reviews() {
             href="https://www.google.com/maps/place/La+Terrasse+d'Hugo"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-hover-lift inline-flex items-center gap-2 rounded-sm border-2 border-creme/30 px-8 py-4 font-sans text-sm font-semibold uppercase tracking-wider text-creme transition-all duration-300 hover:border-creme hover:bg-creme/10"
+            className="btn-hover-lift inline-flex items-center gap-2 rounded-sm border-2 border-creme/30 px-6 py-3 font-sans text-sm font-semibold uppercase tracking-wider text-creme transition-all duration-300 hover:border-creme hover:bg-creme/10"
           >
-            Laisser un avis sur Google
+            Laisser un avis
           </Link>
         </div>
       </div>

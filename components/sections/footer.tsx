@@ -19,7 +19,7 @@ export function Footer() {
   }
 
   return (
-    <footer ref={ref} className="bg-noir py-16">
+    <footer ref={ref} className="bg-noir py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-3">
           {/* Logo & Description — slide in from left */}
