@@ -426,13 +426,13 @@
 
 .night-mode {
   --noir: #000000;
-  --creme: #080808;
-  --creme-light: #0c0c0c;
+  --creme: #000000;
+  --creme-light: #000000;
   --gris-pierre: #999;
   --or-ambre: #e8a84c;
   --cuivre: #d4a054;
-  --olive: #0d1508;
-  --olive-light: #1a2610;
+  --olive: #000000;
+  --olive-light: #000000;
   --background: #000000;
   --foreground: #ede5d8;
   --border: rgba(255, 255, 255, 0.08);
@@ -446,11 +446,11 @@
   color: #ede5d8;
 }
 
-/* ── Sections — noir total ── */
-.night-mode .bg-creme      { background-color: #080808 !important; }
-.night-mode .bg-creme-light { background-color: #0c0c0c !important; }
+/* ── Sections — TOUT noir #000 ── */
+.night-mode .bg-creme      { background-color: #000000 !important; }
+.night-mode .bg-creme-light { background-color: #000000 !important; }
 .night-mode .bg-noir        { background-color: #000000 !important; }
-.night-mode .bg-olive       { background-color: #060a04 !important; }
+.night-mode .bg-olive       { background-color: #000000 !important; }
 
 /* ── Texte — contraste maximum sur noir ── */
 .night-mode .text-noir        { color: #f5ede0 !important; }
@@ -466,20 +466,20 @@
   border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* ── Images — cinématique sans teinte rouge ── */
+/* ── Images — cinématique douce ── */
 .night-mode img,
 .night-mode video {
   filter: brightness(0.78) saturate(1.1);
-  transition: filter 0.4s ease, box-shadow 0.4s ease;
+  transition: filter 1.2s ease, box-shadow 1.2s ease;
 }
 
-/* ✦ GLOW on image hover — lumière dorée ✦ */
+/* ✦ GLOW on image hover — lumière dorée lente ✦ */
 .night-mode img:hover,
 .night-mode video:hover {
   filter: brightness(0.9) saturate(1.2);
   box-shadow:
-    0 0 40px rgba(232, 168, 76, 0.2),
-    0 0 80px rgba(232, 168, 76, 0.08);
+    0 0 30px rgba(232, 168, 76, 0.15),
+    0 0 60px rgba(232, 168, 76, 0.06);
 }
 
 /* ── Map ── */

@@ -66,7 +66,7 @@ export function NightModeToggle() {
       {clicked && (
         <span className="absolute inset-0 animate-ping rounded-full bg-or-ambre/30" />
       )}
-      {/* Sun / Moon swap */}
+      {/* Moon visible en nuit, Sun visible en jour */}
       <span
         className={`absolute transition-all duration-500 ${
           isNight
@@ -74,7 +74,7 @@ export function NightModeToggle() {
             : "rotate-180 scale-0 opacity-0"
         }`}
       >
-        <Sun className="h-6 w-6" />
+        <Moon className="h-6 w-6" />
       </span>
       <span
         className={`absolute transition-all duration-500 ${
@@ -83,7 +83,7 @@ export function NightModeToggle() {
             : "rotate-0 scale-100 opacity-100"
         }`}
       >
-        <Moon className="h-6 w-6" />
+        <Sun className="h-6 w-6" />
       </span>
     </button>
   )
