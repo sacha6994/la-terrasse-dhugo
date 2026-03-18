@@ -57,7 +57,7 @@ export function NightModeToggle() {
         clicked ? "scale-125" : "scale-100 hover:scale-110"
       } ${
         isNight
-          ? "border-amber-500/40 bg-amber-950/80 text-amber-400 shadow-amber-500/30"
+          ? "border-amber-500/50 bg-amber-950/80 text-amber-400 shadow-[0_0_20px_rgba(232,168,76,0.3)]"
           : "border-noir/15 bg-creme/90 text-noir shadow-noir/10"
       }`}
       aria-label={isNight ? "Mode jour" : "Mode nuit"}

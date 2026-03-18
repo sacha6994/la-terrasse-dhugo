@@ -466,29 +466,26 @@
   border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* ── Images — cinématique douce ── */
+/* ── Images — aucun filtre, identiques au mode jour ── */
+/* Seul le glow ambre apparaît au hover */
 .night-mode img,
 .night-mode video {
-  filter: brightness(0.78) saturate(1.1);
-  transition: filter 1.2s ease, box-shadow 1.2s ease;
+  transition: box-shadow 1s ease;
 }
-
-/* ✦ GLOW on image hover — lumière dorée lente ✦ */
 .night-mode img:hover,
 .night-mode video:hover {
-  filter: brightness(0.9) saturate(1.2);
   box-shadow:
-    0 0 30px rgba(232, 168, 76, 0.15),
-    0 0 60px rgba(232, 168, 76, 0.06);
+    0 0 25px rgba(232, 168, 76, 0.15),
+    0 0 50px rgba(232, 168, 76, 0.06);
 }
 
-/* ── Map ── */
+/* ── Map — légèrement assombri ── */
 .night-mode iframe {
-  filter: brightness(0.6) saturate(0.8);
-  transition: filter 0.4s ease;
+  filter: brightness(0.7);
+  transition: filter 0.6s ease;
 }
 .night-mode iframe:hover {
-  filter: brightness(0.8) saturate(0.9);
+  filter: brightness(0.85);
 }
 
 /* ── Cards — glow lumineux au hover ── */
@@ -567,7 +564,7 @@
   }
 }
 
-/* ── Ambient lights on sections — lueurs chaudes ── */
+/* ── Ambient lights on sections — lueurs chaudes visibles ── */
 .night-mode section {
   position: relative;
 }
@@ -577,10 +574,21 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 10% 90%, rgba(232, 168, 76, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 10%, rgba(232, 168, 76, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse at 5% 95%, rgba(232, 168, 76, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 95% 5%, rgba(232, 168, 76, 0.06) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, rgba(232, 168, 76, 0.02) 0%, transparent 60%);
   pointer-events: none;
   z-index: 1;
+}
+
+/* ── Vignette sur chaque section ── */
+.night-mode section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ── Scrollbar ── */
@@ -593,22 +601,35 @@
 
 /* ── Links glow on hover ── */
 .night-mode a:hover {
-  text-shadow: 0 0 15px rgba(232, 168, 76, 0.35);
+  text-shadow: 0 0 20px rgba(232, 168, 76, 0.4);
 }
 
 /* ── Social icons glow ── */
 .night-mode .hover\:scale-110:hover {
-  box-shadow: 0 0 20px rgba(232, 168, 76, 0.3) !important;
+  box-shadow: 0 0 25px rgba(232, 168, 76, 0.35) !important;
 }
 
-/* ── Divider lines — fil lumineux ── */
+/* ── Divider lines — fil lumineux vif ── */
 .night-mode .bg-or-ambre {
-  box-shadow: 0 0 12px rgba(232, 168, 76, 0.4);
+  box-shadow: 0 0 15px rgba(232, 168, 76, 0.5), 0 0 30px rgba(232, 168, 76, 0.15);
 }
 
-/* ── Star icons — étoiles brillantes ── */
+/* ── Star icons — étoiles scintillantes ── */
 .night-mode .fill-or-ambre {
-  filter: drop-shadow(0 0 6px rgba(232, 168, 76, 0.5));
+  filter: drop-shadow(0 0 8px rgba(232, 168, 76, 0.6));
+}
+
+/* ── Texte or-ambre lumineux ── */
+.night-mode .text-or-ambre,
+.night-mode .font-handwritten {
+  text-shadow: 0 0 20px rgba(232, 168, 76, 0.2);
+}
+
+/* ── Bordures de cartes lueur subtile ── */
+.night-mode .rounded-xl,
+.night-mode .rounded-lg,
+.night-mode .rounded-2xl {
+  border-color: rgba(232, 168, 76, 0.06);
 }
 
 /* ── Header night ── */
@@ -690,61 +711,64 @@
   box-shadow: 0 0 40px rgba(232, 168, 76, 0.1), 0 12px 35px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* ══════════ GALERIE — Slides cinématiques ══════════ */
+/* ══════════ GALERIE — Slides avec halo doré ══════════ */
 .night-mode #galerie .group {
-  transition: box-shadow 0.5s ease, transform 0.5s ease !important;
+  transition: box-shadow 0.6s ease, transform 0.6s ease !important;
 }
 .night-mode #galerie .group:hover {
   box-shadow:
-    0 0 30px rgba(232, 168, 76, 0.18),
-    0 0 60px rgba(232, 168, 76, 0.06) !important;
+    0 0 35px rgba(232, 168, 76, 0.2),
+    0 0 70px rgba(232, 168, 76, 0.08) !important;
   transform: translateY(-4px) !important;
 }
 
-/* ══════════ CARTE — Spécialités glow chaud ══════════ */
+/* ══════════ CARTE — Spécialités halo gourmand ══════════ */
 .night-mode #carte .group {
-  transition: box-shadow 0.5s ease !important;
+  transition: box-shadow 0.6s ease !important;
 }
 .night-mode #carte .group:hover {
+  box-shadow:
+    0 0 35px rgba(232, 168, 76, 0.2),
+    0 0 70px rgba(232, 168, 76, 0.08) !important;
+}
+.night-mode #carte button:hover {
+  box-shadow: 0 0 18px rgba(232, 168, 76, 0.2);
+}
+
+/* ══════════ AVIS — Témoignages chaleureux ══════════ */
+.night-mode #avis .group {
+  transition: box-shadow 0.5s ease, border-color 0.5s ease;
+}
+.night-mode #avis .group:hover {
   box-shadow:
     0 0 30px rgba(232, 168, 76, 0.18),
     0 0 60px rgba(232, 168, 76, 0.06) !important;
 }
-.night-mode #carte button:hover {
-  box-shadow: 0 0 15px rgba(232, 168, 76, 0.15);
-}
 
-/* ══════════ AVIS — Témoignages lumineux ══════════ */
-.night-mode #avis .group:hover {
-  box-shadow:
-    0 0 25px rgba(232, 168, 76, 0.15),
-    0 0 50px rgba(232, 168, 76, 0.05) !important;
-}
-
-/* ══════════ INFOS — Cartes pratiques ══════════ */
+/* ══════════ INFOS — Cartes avec bordure lumineuse ══════════ */
 .night-mode #infos .rounded-xl {
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(232, 168, 76, 0.06);
   transition: border-color 0.5s ease, box-shadow 0.5s ease;
 }
 .night-mode #infos .rounded-xl:hover {
-  border-color: rgba(232, 168, 76, 0.2);
-  box-shadow: 0 0 25px rgba(232, 168, 76, 0.1);
+  border-color: rgba(232, 168, 76, 0.25);
+  box-shadow: 0 0 30px rgba(232, 168, 76, 0.12);
 }
 .night-mode #infos .rounded-lg:hover {
-  box-shadow: 0 0 15px rgba(232, 168, 76, 0.08);
+  box-shadow: 0 0 18px rgba(232, 168, 76, 0.1);
 }
 
-/* ══════════ CONCEPT — Highlights glow ══════════ */
+/* ══════════ CONCEPT — Highlights lumineux ══════════ */
 .night-mode #concept .group:hover {
   box-shadow:
-    0 0 25px rgba(232, 168, 76, 0.15),
-    0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    0 0 30px rgba(232, 168, 76, 0.18),
+    0 4px 20px rgba(0, 0, 0, 0.3) !important;
 }
 .night-mode #concept .rounded-2xl.bg-noir {
-  box-shadow: 0 0 30px rgba(232, 168, 76, 0.08);
+  box-shadow: 0 0 35px rgba(232, 168, 76, 0.1);
 }
 .night-mode #concept .border-creme {
-  border-color: rgba(232, 168, 76, 0.2) !important;
+  border-color: rgba(232, 168, 76, 0.25) !important;
 }
 
 /* ══════════ RESERVATION — CTA nuit ══════════ */
