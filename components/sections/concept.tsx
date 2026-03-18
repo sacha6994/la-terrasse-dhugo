@@ -36,7 +36,7 @@ export function Concept() {
               }`}
             >
               <span className="font-handwritten text-xl text-or-ambre">Depuis 2021</span>
-              <h2 className="mt-2 font-serif text-4xl font-semibold text-noir md:text-5xl lg:text-6xl">
+              <h2 className="mt-2 font-serif text-3xl font-semibold text-noir sm:text-4xl md:text-5xl lg:text-6xl">
                 Notre<br />Histoire
               </h2>
               <div
@@ -62,8 +62,8 @@ export function Concept() {
                 }`}
               >
                 <MapPin className="h-4 w-4 text-olive" />
-                <span className="font-sans text-sm text-noir">
-                  23 Avenue Victor Hugo, Rodez — Face au Musée Soulages
+                <span className="font-sans text-xs text-noir sm:text-sm">
+                  23 Av. Victor Hugo, Rodez — Face au Musée Soulages
                 </span>
               </div>
             </div>
@@ -76,7 +76,7 @@ export function Concept() {
                   isInView ? "translate-y-0 rotate-0 scale-100 opacity-100" : "translate-y-10 rotate-2 scale-95 opacity-0"
                 }`}
               >
-                <div className="relative aspect-[3/4]">
+                <div className="relative aspect-square sm:aspect-[3/4]">
                   <Image
                     src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop"
                     alt="Intérieur du restaurant La Terrasse d'Hugo"
@@ -120,7 +120,7 @@ export function Concept() {
 
         {/* ── STATS BAR ── */}
         <div
-          className={`mt-16 grid grid-cols-3 gap-4 rounded-2xl bg-noir p-6 md:p-8 transition-all duration-700 delay-300 ${
+          className={`mt-12 grid grid-cols-3 gap-2 rounded-2xl bg-noir p-4 sm:mt-16 sm:gap-4 sm:p-6 md:p-8 transition-all duration-700 delay-300 ${
             isInView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
@@ -132,7 +132,7 @@ export function Concept() {
               }`}
               style={{ transitionDelay: `${500 + index * 100}ms` }}
             >
-              <span className="font-serif text-3xl font-semibold text-or-ambre md:text-4xl">
+              <span className="font-serif text-2xl font-semibold text-or-ambre sm:text-3xl md:text-4xl">
                 {stat.value}
                 <span className="text-lg text-or-ambre/70">{stat.suffix}</span>
               </span>

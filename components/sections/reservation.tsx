@@ -23,7 +23,7 @@ export function Reservation() {
           }`}
         >
           <span className="font-handwritten text-xl text-or-ambre">On vous attend !</span>
-          <h2 className="mt-2 font-serif text-3xl font-semibold text-creme md:text-4xl lg:text-5xl">
+          <h2 className="mt-2 font-serif text-2xl font-semibold text-creme sm:text-3xl md:text-4xl lg:text-5xl">
             Réservez votre table
           </h2>
           <p className="mt-4 font-sans text-creme/70">
@@ -39,7 +39,7 @@ export function Reservation() {
         >
           <Link
             href="tel:+33565688143"
-            className="btn-hover-lift btn-shimmer animate-pulse-glow group inline-flex w-full items-center justify-center gap-3 rounded-sm bg-or-ambre px-8 py-4 font-sans text-sm font-semibold uppercase tracking-wider text-noir transition-all duration-300 hover:bg-cuivre sm:w-auto"
+            className="btn-hover-lift btn-shimmer animate-pulse-glow group inline-flex w-full items-center justify-center gap-3 rounded-sm bg-or-ambre px-6 py-3.5 font-sans text-sm font-semibold uppercase tracking-wider text-noir transition-all duration-300 hover:bg-cuivre sm:w-auto sm:px-8 sm:py-4"
           >
             <Phone className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
             Appeler
@@ -48,7 +48,7 @@ export function Reservation() {
             href="https://www.instagram.com/la_terrasse_d_hugo"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-hover-lift group inline-flex w-full items-center justify-center gap-3 rounded-sm border-2 border-creme/30 px-8 py-4 font-sans text-sm font-semibold uppercase tracking-wider text-creme transition-all duration-300 hover:border-creme hover:bg-creme/10 sm:w-auto"
+            className="btn-hover-lift group inline-flex w-full items-center justify-center gap-3 rounded-sm border-2 border-creme/30 px-6 py-3.5 font-sans text-sm font-semibold uppercase tracking-wider text-creme transition-all duration-300 hover:border-creme hover:bg-creme/10 sm:w-auto sm:px-8 sm:py-4"
           >
             <Calendar className="h-5 w-5" />
             Réserver en ligne

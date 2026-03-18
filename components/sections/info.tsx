@@ -47,7 +47,7 @@ export function Info() {
           <span className="font-handwritten text-xl text-or-ambre md:text-2xl">
             Nous retrouver
           </span>
-          <h2 className="mt-2 font-serif text-4xl font-semibold text-noir md:text-5xl lg:text-6xl">
+          <h2 className="mt-2 font-serif text-3xl font-semibold text-noir sm:text-4xl md:text-5xl lg:text-6xl">
             Infos Pratiques
           </h2>
           <div
@@ -67,13 +67,13 @@ export function Info() {
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2879.8821!2d2.5757!3d44.3549!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s23+Avenue+Victor+Hugo%2C+12000+Rodez!5e0!3m2!1sfr!2sfr!4v1709000000000"
               width="100%"
-              height="350"
+              height="250"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Carte Google Maps - La Terrasse d'Hugo"
-              className="w-full grayscale transition-all duration-700 hover:grayscale-0"
+              className="w-full grayscale transition-all duration-700 hover:grayscale-0 sm:h-[350px]"
             />
             {/* Overlay card — adresse sur la map */}
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-lg bg-noir/90 px-5 py-4 backdrop-blur-md sm:left-4 sm:right-auto">

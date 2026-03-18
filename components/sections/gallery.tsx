@@ -149,7 +149,7 @@ export function Gallery() {
           >
             <X className="h-5 w-5" />
           </button>
-          <div className="relative h-[80vh] w-full max-w-4xl animate-scale-up" onClick={(e) => e.stopPropagation()}>
+          <div className="relative h-[65vh] w-full max-w-4xl animate-scale-up sm:h-[80vh]" onClick={(e) => e.stopPropagation()}>
             <Image
               src={galleryImages[lightbox].src}
               alt={galleryImages[lightbox].alt}
@@ -157,20 +157,20 @@ export function Gallery() {
               className="rounded-lg object-contain"
               sizes="100vw"
             />
-            <p className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-sm bg-noir/80 px-4 py-1.5 font-serif text-base text-creme backdrop-blur-sm">
+            <p className="absolute bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-sm bg-noir/80 px-4 py-1.5 font-serif text-sm text-creme backdrop-blur-sm sm:text-base">
               {galleryImages[lightbox].caption}
             </p>
           </div>
           <button
             onClick={(e) => { e.stopPropagation(); navigate(-1) }}
-            className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full bg-creme/10 text-creme transition-all hover:bg-creme/20"
+            className="absolute left-2 flex h-11 w-11 items-center justify-center rounded-full bg-creme/15 text-creme transition-all hover:bg-creme/25 sm:left-3 sm:h-10 sm:w-10"
             aria-label="Précédent"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); navigate(1) }}
-            className="absolute right-3 flex h-10 w-10 items-center justify-center rounded-full bg-creme/10 text-creme transition-all hover:bg-creme/20"
+            className="absolute right-2 flex h-11 w-11 items-center justify-center rounded-full bg-creme/15 text-creme transition-all hover:bg-creme/25 sm:right-3 sm:h-10 sm:w-10"
             aria-label="Suivant"
           >
             <ChevronRight className="h-5 w-5" />

@@ -83,7 +83,7 @@ export function Hero() {
         </div>
 
         {/* Main title — letter-by-letter reveal */}
-        <h1 className="font-serif text-5xl font-semibold tracking-tight text-creme md:text-7xl lg:text-8xl">
+        <h1 className="font-serif text-4xl font-semibold tracking-tight text-creme sm:text-5xl md:text-7xl lg:text-8xl">
           <TextReveal text="La Terrasse" delay={400} isVisible={loaded} />
           <br className="hidden sm:block" />
           <span className="sm:hidden"> </span>
@@ -99,7 +99,7 @@ export function Hero() {
 
         {/* Subtitle */}
         <p
-          className={`mt-4 font-sans text-lg font-medium uppercase tracking-[0.3em] text-creme/80 transition-all duration-1000 delay-[1100ms] md:text-xl ${
+          className={`mt-4 font-sans text-base font-medium uppercase tracking-[0.12em] text-creme/80 transition-all duration-1000 delay-[1100ms] sm:text-lg sm:tracking-[0.2em] md:text-xl md:tracking-[0.3em] ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
@@ -108,7 +108,7 @@ export function Hero() {
 
         {/* Quote */}
         <p
-          className={`mx-auto mt-8 max-w-xl font-serif text-xl italic text-creme/90 transition-all duration-1000 delay-[1300ms] md:text-2xl ${
+          className={`mx-auto mt-6 max-w-xl font-serif text-lg italic text-creme/90 transition-all duration-1000 delay-[1300ms] sm:mt-8 sm:text-xl md:text-2xl ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
@@ -123,14 +123,14 @@ export function Hero() {
         >
           <Link
             href="tel:+33565688143"
-            className="btn-hover-lift btn-shimmer animate-pulse-glow group inline-flex items-center gap-3 rounded-sm bg-or-ambre px-8 py-4 font-sans text-sm font-semibold uppercase tracking-wider text-noir transition-all duration-300 hover:bg-cuivre"
+            className="btn-hover-lift btn-shimmer animate-pulse-glow group inline-flex items-center gap-3 rounded-sm bg-or-ambre px-6 py-3.5 font-sans text-sm font-semibold uppercase tracking-wider text-noir transition-all duration-300 hover:bg-cuivre sm:px-8 sm:py-4"
           >
             <Phone className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
             Réserver une table
           </Link>
           <Link
             href="#carte"
-            className="btn-border-draw group inline-flex items-center gap-2 rounded-sm border-2 border-creme/30 bg-transparent px-8 py-4 font-sans text-sm font-semibold uppercase tracking-wider text-creme transition-all duration-300 hover:border-creme hover:bg-creme/10"
+            className="btn-border-draw group inline-flex items-center gap-2 rounded-sm border-2 border-creme/30 bg-transparent px-6 py-3.5 font-sans text-sm font-semibold uppercase tracking-wider text-creme transition-all duration-300 hover:border-creme hover:bg-creme/10 sm:px-8 sm:py-4"
           >
             Découvrir la carte
             <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />

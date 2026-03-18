@@ -53,7 +53,7 @@ export function NightModeToggle() {
   return (
     <button
       onClick={handleClick}
-      className={`fixed right-5 top-1/2 z-[95] -translate-y-1/2 flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg backdrop-blur-md transition-all duration-500 ${
+      className={`fixed z-[95] right-4 bottom-24 flex h-12 w-12 items-center justify-center rounded-full border-2 shadow-lg backdrop-blur-md transition-all duration-500 md:right-5 md:bottom-auto md:top-1/2 md:h-14 md:w-14 md:-translate-y-1/2 ${
         clicked ? "scale-125" : "scale-100 hover:scale-110"
       } ${
         isNight
