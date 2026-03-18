@@ -50,7 +50,7 @@ export function Header() {
           : "bg-gradient-to-b from-noir/50 to-transparent py-6"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="#hero" className="group flex items-center gap-2">
           <span className="font-serif text-xl font-semibold text-creme transition-all duration-300 group-hover:text-or-ambre group-hover:drop-shadow-[0_0_8px_rgba(200,150,78,0.4)] md:text-2xl">

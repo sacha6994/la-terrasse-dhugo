@@ -24,10 +24,11 @@ const caveat = Caveat({
   display: "swap",
 })
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
+  userScalable: false,
 }
 
 export const metadata: Metadata = {
@@ -72,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className="scroll-smooth">
+    <html lang="fr" className="scroll-smooth overflow-x-hidden">
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#c8964e" />

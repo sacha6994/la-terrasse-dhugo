@@ -35,7 +35,7 @@ export function NightModeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <NightModeContext.Provider value={{ isNight, toggle: () => setIsNight((p) => !p) }}>
-      <div className={isNight ? "night-mode" : ""}>{children}</div>
+      <div className={`max-w-[100vw] overflow-x-hidden ${isNight ? "night-mode" : ""}`}>{children}</div>
     </NightModeContext.Provider>
   )
 }
@@ -53,7 +53,7 @@ export function NightModeToggle() {
   return (
     <button
       onClick={handleClick}
-      className={`fixed z-[95] right-4 bottom-24 flex h-12 w-12 items-center justify-center rounded-full border-2 shadow-lg backdrop-blur-md transition-all duration-500 md:right-5 md:bottom-auto md:top-1/2 md:h-14 md:w-14 md:-translate-y-1/2 ${
+      className={`fixed z-[95] right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full border-2 shadow-lg backdrop-blur-md transition-all duration-500 md:right-5 md:h-14 md:w-14 ${
         clicked ? "scale-125" : "scale-100 hover:scale-110"
       } ${
         isNight
@@ -74,7 +74,7 @@ export function NightModeToggle() {
             : "rotate-180 scale-0 opacity-0"
         }`}
       >
-        <Moon className="h-6 w-6" />
+        <Moon className="h-5 w-5 md:h-6 md:w-6" />
       </span>
       <span
         className={`absolute transition-all duration-500 ${
@@ -83,7 +83,7 @@ export function NightModeToggle() {
             : "rotate-0 scale-100 opacity-100"
         }`}
       >
-        <Sun className="h-6 w-6" />
+        <Sun className="h-5 w-5 md:h-6 md:w-6" />
       </span>
     </button>
   )
